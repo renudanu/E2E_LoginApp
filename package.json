@@ -1,0 +1,42 @@
+{
+  "name": "login-app",
+  "version": "1.0.0",
+  "description": "This project is an application skeleton for a typical [AngularJS][angularjs] web app. You can use it\r to quickly bootstrap your angular webapp projects and dev environment for these projects.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "angular-ui-router": "^1.0.0-rc.1",
+    "browser-sync": "^2.18.13",
+    "lodash": "^4.17.4",
+    "selenium-standalone-jar": "^3.0.1"
+  },
+  "devDependencies": {
+    "cucumber": "^1.3.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.3.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-webserver": "^0.9.1",
+    "jshint": "^2.9.5",
+    "less": "^2.7.2",
+    "protractor": "^5.1.2",
+    "protractor-cucumber-framework": "^0.6.0",
+    "uglify": "^0.1.5",
+    "ui-router": "^1.0.0-alpha.3",
+    "webdriver-manager": "^12.0.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular-seed.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angular/angular-seed/issues"
+  },
+  "homepage": "https://github.com/angular/angular-seed#readme"
+}

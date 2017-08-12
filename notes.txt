@@ -1,0 +1,57 @@
+To start a local server to deploy JSON
+D:\HTTP_SERVER>http-server
+
+-----------------------------------
+selenium webserver start
+
+D:\rdanu\POC\LoginApp>
+webdriver-manager start
+-------------------------------------
+GULP
+
+D:\rdanu\POC\LoginApp>
+gulp
+gulp runProtractor
+
+------------------------------------------------------------------------------------------------------------------------
+White paper
+
+1. UI E2E
+2. Gulp
+    * Why gulp
+    * Set up
+    * How package json is getting created using gulp
+    * other utils to uglify, minify
+
+3. UI
+    * Bootstrap : Small Intro
+    * Angular 1.5 : "
+    * HTML 5 :"
+    * less: Less conversion
+
+4. UI Framework
+    * Architecture of the app
+
+5. Build creation
+
+6. E2E Testing
+    * Cucumber protractor framework
+        * Cucumber
+        * Protractor
+        * Gherkins
+
+-----------------------------------------------------------
+1. CORS
+2. OPt
+3. routing issue.
+4.
+
+
+
+
+
+
+
+
+
+

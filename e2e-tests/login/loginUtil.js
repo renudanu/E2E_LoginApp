@@ -21,13 +21,7 @@ var loginUtil = function () {
                 }.bind(this));
             }.bind(this))
         }.bind(this))
-        /*return this.sendText(this.userName, username).then(function () {
-            console.log('1 :'+this.userName)
-            return this.sendText(this.password, password).then(function () {
-                console.log('1 :'+this.userName)
-                return this.click(this.loginButton);
-            }.bind(this))
-        }.bind(this))*/
+
     };
 
     this.waitFor = function (locator, timeoutDelay) {

@@ -1,45 +1,37 @@
-var gulp = require('gulp');
-//var webserver = require('gulp-webserver');
-// Include Our Plugins
-var jshint = require('gulp-jshint');
-var webserver = require('./gulp/webserver');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var protractor = require('gulp-protractor').protractor;
+var gulp = require('gulp'),
+    jshint = require('gulp-jshint'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    rename = require('gulp-rename'),
+    less = require('gulp-less'),
+    path = require('path'),
+    protractor = require('gulp-protractor').protractor,
+    connect = require('gulp-connect'),
+    proxy = require('http-proxy-middleware');
 
 
-var server = {
-    host: 'localhost',
-    port: '8001'
-}
+gulp.task('connect', function() {
+    connect.server({
+        port:8001,
+        root: 'app',
+        livereload: true,
+        middleware: function(connect, opt) {
+            return [
+                proxy('/rest', {
+                    target: 'http://localhost:8080',
+                    changeOrigin:true
+                })
+            ]
+        }
+    });
+});
 
-
-gulp.task('one',function(){
-   console.log('gulp running')
-})
-
-/* gulp.task('webserver', function() {
-     gulp.src('app')
-         .pipe(webserver({
-            fallback: 'index.html'
-         }));
-});*/
 
 gulp.task('webserver', function() {
     gulp.src( 'app' )
-        .pipe(webserver({
-            fallback: 'index.html',
-            host:             server.host,
-            port:             server.port,
-            livereload:       true,
-            directoryListing: false,
-            proxies: [
-                {
-                    source: '/login',
-                    target: 'http://localhost:8001/view'
-                }
-                    ]
+        .pipe(webserver1({
+            livereload: true,
+            directoryListing: true
         }));
 });
 
@@ -51,11 +43,26 @@ gulp.task('lint', function() {
 });
 
 // Compile Our Sass
-gulp.task('less', function() {
+/*gulp.task('less', function() {
     return gulp.src('less/!*.less')
         .pipe(less())
         .pipe(gulp.dest('dist/css'));
+});*/
+
+/*gulp.task('less', function () {
+    return gulp.src('./!**!/!*.less')
+        .pipe(less())
+        .pipe(gulp.dest('./app/assets/css/'));
+});*/
+
+gulp.task('less', function () {
+    return gulp.src('./app/**/*.less')
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ]
+        }))
+        .pipe(gulp.dest('./public/css'));
 });
+
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
@@ -63,7 +70,7 @@ gulp.task('scripts', function() {
         .pipe(concat('all.js'))
         .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 });
 
@@ -78,23 +85,22 @@ gulp.task('watch', function() {
     return webserver.proxyLocal();
 }]);*/
 
-gulp.task('runLocal', ['lint', 'scripts','watch'], function () {
- //   watch.localDevWatch();
-    return webserver.proxyLocal();
+gulp.task('runLocal', ['lint', 'scripts','watch', 'connect','less'], function () {
+
 });
 
 
 gulp.task('runProtractor', function () {
-    'use strict';
-    gulp.src([
-        'e2e-tests/login/'
-    ])
-        .pipe(protractor({
-            configFile: 'e2e-tests/protractor.conf.js',
-            keepAlive: true,
-            args: null
-        }))
-});
+     'use strict';
+     gulp.src([
+         'e2e-tests/login/'
+     ])
+         .pipe(protractor({
+             configFile: 'e2e-tests/protractor.conf.js',
+             keepAlive: true,
+             args: null
+         }))
+ });
 
 gulp.task('open', function(){
     gulp.src('app/index.html/login')

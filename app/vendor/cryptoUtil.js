@@ -30,8 +30,8 @@ app.service('cryptoUtil', function($q,getServerPublicKeySpecRepository){
                 } else if (publicKey) {
                     defer.resolve();
                 } else {
-                    isLoading = true;
                     getServerPublicKeySpecRepository.getServerPublicKeySpec().then(handleSuccess, handleError);
+                    isLoading = true;
                 }
 
                 return defer.promise;
@@ -42,7 +42,8 @@ app.service('cryptoUtil', function($q,getServerPublicKeySpecRepository){
                 var initSecureRandom = new SecureRandom();
                 var result = publicKey.encrypt(value);
                 return hex2b64(result);
+
             };
 
 
-})
+});
